@@ -14,7 +14,15 @@ $(function () {
             var $wrapperDiv = $("<div>");
             gifs.forEach((gif) => {
                 var imageUrl = gif.images.fixed_height.url;
-                var $img = $("<img>").attr("src", imageUrl).css("margin", "10px")
+                var $img = $("<img>").attr("src", imageUrl).css("margin", "10px").attr("still", "f");
+                $img.click(function(){
+                    switch($(this).attr("still")){
+                        case "t":
+                            return $(this).attr("still", "f").attr("src", gif.images.fixed_height.url);
+                        case  "f":
+                            return $(this).attr("still", "t").attr("src", gif.images.fixed_height_still.url);
+                    }
+                })
                 $wrapperDiv.append($img);
             })
             $gifsContainer.html($wrapperDiv);
